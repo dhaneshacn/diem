@@ -12,6 +12,13 @@ fn main() -> Result<()> {
             &OldMetadata,
             &AccoutNotFound,
             &UnknownAccountRoleType,
+            &CreateAccountEvent,
+            &GetTransactionsWithoutEvents,
+            &GetAccountTransactionsWithoutEvents,
+            &GetAccumulatorConsistencyProof,
+            &NoUnknownEvents, 
+            &GetTreasuryComplianceAccount,
+/* 
             &DesignatedDealerPreburns,
             &ParentVaspAccountRole,
             &GetAccountByVersion,
@@ -22,21 +29,17 @@ fn main() -> Result<()> {
             &MempoolValidationError,
             &ExpiredTransaction,
             &RotateComplianceKeyEvent,
-            &CreateAccountEvent,
-            &GetTransactionsWithoutEvents,
-            &GetAccountTransactionsWithoutEvents,
             &GetAccountTransactionsWithProofs,
             &GetTransactionsWithProofs,
-            &GetTreasuryComplianceAccount,
+           
             &GetEventsWithProofs,
             &GetEventByVersionWithProofTest,
             &GetResourcesTest,
             &MultiAgentPaymentOverDualAttestationLimit,
-            &GetAccumulatorConsistencyProof,
-            &NoUnknownEvents,
+   */         
         ])
         .with_admin_tests(&[
-            &PreburnAndBurnEvents,
+          /*   &PreburnAndBurnEvents,
             &CancleBurnEvent,
             &UpdateExchangeRateEvent,
             &MintAndReceivedMintEvents,
@@ -44,7 +47,7 @@ fn main() -> Result<()> {
             &MultiAgentRotateAuthenticationKeyAdminScript,
             &MultiAgentRotateAuthenticationKeyAdminScriptFunction,
             &UpgradeEventAndNewEpoch,
-            &UpgradeDiemVersion,
+            &UpgradeDiemVersion,*/
         ]);
 
     let options = Options::from_args();
