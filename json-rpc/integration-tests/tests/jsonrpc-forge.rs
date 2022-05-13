@@ -18,9 +18,9 @@ fn main() -> Result<()> {
             &GetAccumulatorConsistencyProof,
             &NoUnknownEvents, 
             &GetTreasuryComplianceAccount,
-/* 
-            &DesignatedDealerPreburns,
             &ParentVaspAccountRole,
+
+           /*  &DesignatedDealerPreburns,
             &GetAccountByVersion,
             &ChildVaspAccountRole,
             &PeerToPeerWithEvents,
@@ -36,7 +36,7 @@ fn main() -> Result<()> {
             &GetEventByVersionWithProofTest,
             &GetResourcesTest,
             &MultiAgentPaymentOverDualAttestationLimit,
-   */         
+            */
         ])
         .with_admin_tests(&[
           /*   &PreburnAndBurnEvents,

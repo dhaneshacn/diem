@@ -6,7 +6,7 @@ use diem_sdk::{
         AccountTransactionsWithProofView, AccumulatorConsistencyProofView,
         EventByVersionWithProofView, EventView,
     },
-    crypto::{hash::CryptoHash, HashValue},
+    crypto::{ed25519::Ed25519PrivateKey,hash::CryptoHash, HashValue},
     transaction_builder::{stdlib, Currency},
     types::{
         access_path::AccessPath,
@@ -24,7 +24,7 @@ use diem_sdk::{
             WriteSetPayload,
         },
         write_set::{WriteOp, WriteSet, WriteSetMut},
-        AccountKey,
+        AccountKey,LocalAccount
     },
 };
 use forge::{AdminContext, AdminTest, PublicUsageContext, PublicUsageTest, Result, Test};
@@ -40,6 +40,18 @@ mod helper;
 use helper::JsonRpcTestHelper;
 
 pub struct CurrencyInfo;
+
+fn get_testnet_parent_vasp_account() -> LocalAccount {
+    // runtime.block_on(ctx.create_parent_vasp_account(vasp.authentication_key()))?;
+    
+    let key_bytes =
+        hex::decode("f1bd41b7a72efa9521a9abbef4e6f7a474c92e725851647c9eb0fde3a30a03b9").unwrap();
+        // updated with testnet's parent vasp account address. 
+    let private_key: Ed25519PrivateKey = (&key_bytes[..]).try_into().unwrap();
+    let address: AccountAddress = "2a186d8d57acdbee4a9ceca0f8902548".parse().unwrap();
+    let vasp = LocalAccount::new(address.into(), private_key, 0);
+    vasp
+}
 
 impl Test for CurrencyInfo {
     fn name(&self) -> &'static str {
@@ -400,10 +412,7 @@ impl Test for ParentVaspAccountRole {
 
 impl PublicUsageTest for ParentVaspAccountRole {
     fn run<'t>(&self, ctx: &mut PublicUsageContext<'t>) -> Result<()> {
-        let runtime = Runtime::new().unwrap();
-        let vasp = ctx.random_account();
-        runtime.block_on(ctx.create_parent_vasp_account(vasp.authentication_key()))?;
-
+        let vasp = get_testnet_parent_vasp_account();
         let env = JsonRpcTestHelper::new(ctx.url().to_owned());
         let address = format!("{:x}", vasp.address());
         let resp = env.send("get_account", json!([address]));
@@ -415,7 +424,7 @@ impl PublicUsageTest for ParentVaspAccountRole {
             json!({
                 "address": address,
                 "authentication_key": vasp.authentication_key().to_string(),
-                "balances": [{"amount": 0_u64, "currency": "XUS"}],
+                "balances": [{"amount": 20000002_u64, "currency": "XUS"}], // balance changes
                 "delegated_key_rotation_capability": false,
                 "delegated_withdrawal_capability": false,
                 "is_frozen": false,
@@ -432,7 +441,7 @@ impl PublicUsageTest for ParentVaspAccountRole {
                     "type": "parent_vasp",
                 },
                 "sent_events_key": EventKey::new_from_address(&vasp.address(), 3),
-                "sequence_number": 0,
+                "sequence_number": 3, // no of transaction also changes
                 "version": resp.diem_ledger_version,
             }),
         );
