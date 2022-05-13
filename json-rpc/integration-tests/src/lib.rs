@@ -461,7 +461,7 @@ impl Test for GetAccountByVersion {
 impl PublicUsageTest for GetAccountByVersion {
     fn run<'t>(&self, ctx: &mut PublicUsageContext<'t>) -> Result<()> {
         let env = JsonRpcTestHelper::new(ctx.url().to_owned());
-        let factory = ctx.transaction_factory();
+/*        let factory = ctx.transaction_factory();
 
         let runtime = Runtime::new().unwrap();
         let mut vasp = ctx.random_account();
@@ -470,11 +470,12 @@ impl PublicUsageTest for GetAccountByVersion {
         env.submit_and_wait(&vasp.sign_with_transaction_builder(
             factory.create_child_vasp_account(Currency::XUS, child.authentication_key(), false, 0),
         ));
-
+*/
+let  vasp = get_testnet_parent_vasp_account();
         let address = format!("{:x}", vasp.address());
         let resp = env.send("get_account_transaction", json!([address, 0, false]));
         let result = resp.result.unwrap();
-        let prev_version: u64 = result["version"].as_u64().unwrap() - 1;
+        let prev_version: u64 = result["version"].as_u64().unwrap()-1 ;
         let resp = env.send("get_account", json!([address, prev_version]));
         let result = resp.result.unwrap();
         let human_name = result["role"]["human_name"].as_str().unwrap();
@@ -523,17 +524,19 @@ impl PublicUsageTest for ChildVaspAccountRole {
         let env = JsonRpcTestHelper::new(ctx.url().to_owned());
         let factory = ctx.transaction_factory();
 
-        let runtime = Runtime::new().unwrap();
-        let mut parent = ctx.random_account();
         let child = ctx.random_account();
-        runtime.block_on(ctx.create_parent_vasp_account(parent.authentication_key()))?;
-        env.submit_and_wait(&parent.sign_with_transaction_builder(
+        
+        let mut parent = get_testnet_parent_vasp_account();
+        let txn = parent.sign_with_transaction_builder(
             factory.create_child_vasp_account(Currency::XUS, child.authentication_key(), false, 0),
-        ));
-
+        );
+        let resp = env.submit_and_wait(&txn);
+        println!("resp {:?}",resp);
         let address = format!("{:x}", child.address());
+        println!("{}",address);
         let resp = env.send("get_account", json!([address]));
         let result = resp.result.unwrap();
+        
 
         assert_eq!(
             result,

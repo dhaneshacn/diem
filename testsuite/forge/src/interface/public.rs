@@ -1,6 +1,6 @@
 // Copyright (c) The Diem Core Contributors
 // SPDX-License-Identifier: Apache-2.0
-
+use std::str::FromStr;
 use super::Test;
 use crate::{CoreContext, Result, TestReport};
 use diem_rest_client::Client as RestClient;
@@ -69,7 +69,7 @@ impl<'t> PublicUsageContext<'t> {
     }
 
     pub fn transaction_factory(&self) -> TransactionFactory {
-        TransactionFactory::new(self.chain_id())
+        TransactionFactory::new(ChainId::from_str("3").unwrap()) // set to DEVNET
     }
 
     pub async fn fund(&mut self, address: AccountAddress, amount: u64) -> Result<()> {

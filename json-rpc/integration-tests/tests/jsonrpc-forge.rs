@@ -19,7 +19,7 @@ fn main() -> Result<()> {
             &NoUnknownEvents, 
             &GetTreasuryComplianceAccount,
             &ParentVaspAccountRole,
-
+            
            /*  &DesignatedDealerPreburns,
             &GetAccountByVersion,
             &ChildVaspAccountRole,
