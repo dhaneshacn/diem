@@ -23,15 +23,14 @@ mod helper;
 use helper::JsonRpcTestHelper;
 
 use crate::helper::FaucetClient;
+
 #[test]
 fn get_dd_preburn_test(){
- 
     let factory = JsonRpcTestHelper::get_transaction_factory();
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url().to_owned());
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
     let  mut dd = LocalAccount::generate(&mut OsRng);
-         
-   let create_dd_account_txn = tc_account.sign_with_transaction_builder(
+    let create_dd_account_txn = tc_account.sign_with_transaction_builder(
         factory.create_designated_dealer(
             Currency::XUS,
             0, // sliding_nonce
@@ -41,8 +40,6 @@ fn get_dd_preburn_test(){
         ),
     );
     env.submit_and_wait(&create_dd_account_txn);
-    
-   
     let address = format!("{:x}", dd.address());
     let resp = env.send("get_account", json!([address]));
     let result = resp.result.unwrap();
@@ -228,7 +225,6 @@ fn rotate_compliance_key_test(){
                 "transaction_version":version
             }
         ]),
-        
     );
 
 }
