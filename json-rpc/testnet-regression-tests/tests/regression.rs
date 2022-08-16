@@ -1,3 +1,4 @@
+use assert_json_diff::assert_json_eq;
 use diem_sdk::{
     crypto::hash::CryptoHash,
     crypto::HashValue,
@@ -11,12 +12,9 @@ use diem_sdk::{
     },
 };
 use diem_transaction_builder::stdlib;
-use std::error::Error;
-
-use assert_json_diff::assert_json_eq;
 use rand_core::OsRng;
 use serde_json::json;
-
+use std::error::Error;
 use std::ops::Deref;
 
 pub struct CurrencyInfo;
@@ -26,6 +24,7 @@ use helper::JsonRpcTestHelper;
 use crate::helper::FaucetClient;
 
 #[test]
+
 fn get_dd_preburn_test() {
     let factory = JsonRpcTestHelper::get_transaction_factory();
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
@@ -39,6 +38,7 @@ fn get_dd_preburn_test() {
             &format!("No. {} DD", tc_account.sequence_number()),
             false, // add all currencies
         ));
+
     env.submit_and_wait(&create_dd_account_txn);
     let address = format!("{:x}", dd.address());
     let resp = env.send("get_account", json!([address]));
@@ -229,7 +229,9 @@ fn rotate_compliance_key_test() {
 #[test]
 fn resubmitting_transaction_wont_fail_test() {
     let factory = JsonRpcTestHelper::get_transaction_factory();
+
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
     let (_parent, mut child1, child2) =
         env.create_parent_and_two_child_accounts(&factory, 1_000_000_000, &mut tc_account);
@@ -246,6 +248,7 @@ fn resubmitting_transaction_wont_fail_test() {
 #[test]
 fn get_tressury_compliance_test() {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let address = JsonRpcTestHelper::get_tc_account_address();
     let resp = env.send("get_account", json!([address]));
     let result = resp.result.unwrap();
@@ -274,6 +277,7 @@ fn get_tressury_compliance_test() {
 #[test]
 fn peer_to_peer_with_events() {
     let factory = JsonRpcTestHelper::get_transaction_factory();
+
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
 
@@ -390,8 +394,10 @@ fn peer_to_peer_with_events() {
     assert_json_eq!(result, expected);
 }
 #[test]
+
 fn no_unknown_events_test() -> Result<(), Box<dyn Error>> {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let response = env.send("get_transactions", json!([0, 1000, true]));
     let txns = response.result.unwrap();
     for txn in txns.as_array().unwrap() {
@@ -400,6 +406,7 @@ fn no_unknown_events_test() -> Result<(), Box<dyn Error>> {
             assert_ne!(event_type, "unknown", "{}", event);
         }
     }
+
     Ok(())
 }
 #[test]
@@ -416,11 +423,13 @@ fn get_account_transactions_without_events_test() -> Result<(), Box<dyn Error>> 
     for txn in txns.as_array().unwrap() {
         assert_eq!(txn["events"], json!([]));
     }
+
     Ok(())
 }
 #[test]
 fn get_transactions_without_events_test() -> Result<(), Box<dyn Error>> {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let response = env.send("get_transactions", json!([0, 1000, false]));
     let txns = response.result.unwrap();
     assert!(!txns.as_array().unwrap().is_empty());
@@ -429,11 +438,13 @@ fn get_transactions_without_events_test() -> Result<(), Box<dyn Error>> {
         assert_eq!(txn["version"], index);
         assert_eq!(txn["events"], json!([]));
     }
+
     Ok(())
 }
 #[test]
 fn create_account_event_test() -> Result<(), Box<dyn Error>> {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let response = env.send(
         "get_events",
         json!(["00000000000000000000000000000000000000000a550c18", 0, 2]),
@@ -464,12 +475,14 @@ fn create_account_event_test() -> Result<(), Box<dyn Error>> {
             },
         ]),
     );
+
     Ok(())
 }
 #[test]
 fn child_vasp_account_role_test() -> Result<(), Box<dyn Error>> {
     let factory = JsonRpcTestHelper::get_transaction_factory();
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
     let (parent, child) = env.create_parent_and_one_child_account(&factory, 500, &mut tc_account);
 
@@ -496,6 +509,7 @@ fn child_vasp_account_role_test() -> Result<(), Box<dyn Error>> {
             "version": resp.diem_ledger_version,
         }),
     );
+
     Ok(())
 }
 
@@ -558,6 +572,7 @@ fn get_account_by_version_test() -> Result<(), Box<dyn Error>> {
             "version": prev_version,
         }),
     );
+
     Ok(())
 }
 
@@ -588,11 +603,13 @@ fn unknown_role_type_test() -> Result<(), Box<dyn Error>> {
             "version": resp.diem_ledger_version,
         }),
     );
+
     Ok(())
 }
 #[test]
 fn account_not_found_test() -> Result<(), Box<dyn Error>> {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let random_local_account = LocalAccount::generate(&mut OsRng);
 
     let resp = env.send(
@@ -601,6 +618,7 @@ fn account_not_found_test() -> Result<(), Box<dyn Error>> {
     );
     println!("{:#?}", resp);
     assert!(resp.result.is_none());
+
     Ok(())
 }
 #[test]
@@ -657,17 +675,20 @@ fn block_metadata_test() -> Result<(), Box<dyn Error>> {
         expected_hash,
         metadata["accumulator_root_hash"].as_str().unwrap()
     );
+
     Ok(())
 }
 #[test]
 fn old_metadata_test() -> Result<(), Box<dyn Error>> {
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let resp = env.send("get_metadata", json!([1]));
     let metadata = resp.result.unwrap();
     // no data provided for the following fields when requesting older version
     assert_eq!(metadata["script_hash_allow_list"], json!(null));
     assert_eq!(metadata["module_publishing_allowed"], json!(null));
     assert_eq!(metadata["diem_version"], json!(null));
+
     Ok(())
 }
 
@@ -703,6 +724,7 @@ fn currency_info_test() -> Result<(), Box<dyn Error>> {
             }
         ])
     );
+
     Ok(())
 }
 #[test]
@@ -710,6 +732,7 @@ fn mempool_validation_error_test() -> Result<(), Box<dyn Error>> {
     let factory = JsonRpcTestHelper::get_transaction_factory();
 
     let mut env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
     let (_, child_1, child_2) =
         env.create_parent_and_two_child_accounts(&factory, 500, &mut tc_account);
@@ -739,6 +762,7 @@ fn mempool_validation_error_test() -> Result<(), Box<dyn Error>> {
         //         .to_string(),
         // );
     });
+
     Ok(())
     //env.wait_for_txn(&txn1);
 }
@@ -768,6 +792,7 @@ fn expired_transaction_test() -> Result<(), Box<dyn Error>> {
             "Server error: VM Validation error: TRANSACTION_EXPIRED".to_string(),
         );
     });
+
     Ok(())
 }
 #[test]
@@ -819,6 +844,7 @@ fn parent_vasp_account_role_test() -> Result<(), Box<dyn Error>> {
             "version": resp.diem_ledger_version,
         }),
     );
+
     Ok(())
 }
 #[test]
@@ -862,6 +888,7 @@ fn peer_to_peer_error_explination() -> Result<(), Box<dyn Error>> {
             "type": "move_abort"
         })
     );
+
     Ok(())
 }
 #[test]
@@ -869,6 +896,7 @@ fn multi_agent_payment_over_dual_attestation_limit_test() -> Result<(), Box<dyn 
     let factory = JsonRpcTestHelper::get_transaction_factory();
     let chain_id = JsonRpcTestHelper::get_chain_id();
     let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
     let mut tc_account = JsonRpcTestHelper::get_tc_account(&env);
     let limit = env.get_metadata()["dual_attestation_limit"]
         .as_u64()
@@ -914,5 +942,6 @@ fn multi_agent_payment_over_dual_attestation_limit_test() -> Result<(), Box<dyn 
 
     assert_eq!(sender_initial_balance - transfer_amount, sender_balance);
     assert_eq!(receiver_initial_balance + transfer_amount, receiver_balance);
+
     Ok(())
 }

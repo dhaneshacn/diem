@@ -19,6 +19,7 @@ use rand_core::OsRng;
 use reqwest::{StatusCode, Url};
 use serde_json::{json, Value};
 use std::{convert::TryFrom, env::VarError};
+
 pub struct FaucetClient {
     url: String,
     json_rpc_client: BlockingClient,
@@ -302,7 +303,8 @@ impl JsonRpcTestHelper {
             JsonRpcTestHelper::get_mint_url(),
             JsonRpcTestHelper::get_json_rpc_url(),
         );
-        let env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
+
+        let mut env = JsonRpcTestHelper::new(JsonRpcTestHelper::get_json_rpc_url());
 
         let mut vasp = LocalAccount::generate(&mut OsRng);
         let child_1 = LocalAccount::generate(&mut OsRng);
