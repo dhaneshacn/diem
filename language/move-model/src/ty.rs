@@ -185,7 +185,7 @@ impl Type {
     /// Skip reference type.
     pub fn skip_reference(&self) -> &Type {
         if let Type::Reference(_, bt) = self {
-            &*bt
+            bt
         } else {
             self
         }
@@ -443,7 +443,7 @@ impl Type {
             TypeTag::Address => Primitive(PrimitiveType::Address),
             TypeTag::Signer => Primitive(PrimitiveType::Signer),
             TypeTag::Struct(s) => {
-                let qid = env.find_struct_by_tag(&s).unwrap_or_else(|| {
+                let qid = env.find_struct_by_tag(s).unwrap_or_else(|| {
                     panic!("Invariant violation: couldn't resolve struct {:?}", s)
                 });
                 let type_args = s
@@ -601,10 +601,10 @@ impl Substitution {
         }
 
         // Substitute or assign variables.
-        if let Some(rt) = self.try_substitute_or_assign(variance, false, &t1, &t2)? {
+        if let Some(rt) = self.try_substitute_or_assign(variance, false, t1, t2)? {
             return Ok(rt);
         }
-        if let Some(rt) = self.try_substitute_or_assign(variance, true, &t2, &t1)? {
+        if let Some(rt) = self.try_substitute_or_assign(variance, true, t2, t1)? {
             return Ok(rt);
         }
 
@@ -646,7 +646,7 @@ impl Substitution {
             (Type::Fun(ts1, r1), Type::Fun(ts2, r2)) => {
                 return Ok(Type::Fun(
                     self.unify_vec(sub_variance, ts1, ts2, "functions")?,
-                    Box::new(self.unify(sub_variance, &*r1, &*r2)?),
+                    Box::new(self.unify(sub_variance, r1, r2)?),
                 ));
             }
             (Type::Struct(m1, s1, ts1), Type::Struct(m2, s2, ts2)) => {
@@ -659,17 +659,13 @@ impl Substitution {
                 }
             }
             (Type::Vector(e1), Type::Vector(e2)) => {
-                return Ok(Type::Vector(Box::new(self.unify(
-                    sub_variance,
-                    &*e1,
-                    &*e2,
-                )?)));
+                return Ok(Type::Vector(Box::new(self.unify(sub_variance, e1, e2)?)));
             }
             (Type::TypeDomain(e1), Type::TypeDomain(e2)) => {
                 return Ok(Type::TypeDomain(Box::new(self.unify(
                     sub_variance,
-                    &*e1,
-                    &*e2,
+                    e1,
+                    e2,
                 )?)));
             }
             (Type::TypeLocal(s1), Type::TypeLocal(s2)) => {
@@ -717,7 +713,7 @@ impl Substitution {
         t2: &Type,
     ) -> Result<Option<Type>, TypeUnificationError> {
         if let Type::Var(v1) = t1 {
-            if let Some(s1) = self.subs.get(&v1).cloned() {
+            if let Some(s1) = self.subs.get(v1).cloned() {
                 return if swapped {
                     // Place the type terms in the right order again, so we
                     // get the 'expected vs actual' direction right.

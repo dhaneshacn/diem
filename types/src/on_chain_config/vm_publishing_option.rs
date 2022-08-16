@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 /// 3. Both module publishing and custom scripts are allowed.
 /// We represent these as an enum instead of a struct since allowlisting and module/script
 /// publishing are mutually exclusive options.
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 pub struct VMPublishingOption {
     pub script_allow_list: Vec<HashValue>,
     pub is_open_module: bool,
@@ -53,7 +53,7 @@ impl OnChainConfig for VMPublishingOption {
     const IDENTIFIER: &'static str = "DiemTransactionPublishingOption";
 
     fn deserialize_into_config(bytes: &[u8]) -> Result<Self> {
-        bcs::from_bytes(&bytes).map_err(|e| {
+        bcs::from_bytes(bytes).map_err(|e| {
             format_err!(
                 "Failed first round of deserialization for VMPublishingOptionInner: {}",
                 e

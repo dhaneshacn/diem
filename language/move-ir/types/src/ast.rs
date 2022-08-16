@@ -127,7 +127,7 @@ pub struct ModuleDependency {
 //**************************************************************************************************
 
 /// A dependency/import declaration
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct ImportDefinition {
     /// the dependency
     /// `addr.m` or `Transaction.m`
@@ -250,7 +250,7 @@ pub struct StructDefinition_ {
 pub type StructDefinition = Spanned<StructDefinition_>;
 
 /// An explicit struct dependency
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct StructDependency {
     /// The declared abilities for the struct
     pub abilities: BTreeSet<Ability>,
@@ -317,7 +317,7 @@ pub struct FunctionDependency {
 }
 
 /// Public or internal modifier for a procedure
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Eq, Debug, Clone)]
 pub enum FunctionVisibility {
     /// The procedure can be invoked anywhere
     /// `public`
@@ -509,7 +509,7 @@ pub type Block = Spanned<Block_>;
 
 /// Bottom of the value hierarchy. These values can be trivially copyable and stored in statedb as a
 /// single entry.
-#[derive(Debug, PartialEq, Clone)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum CopyableVal_ {
     /// An address in the global storage
     Address(AccountAddress),
@@ -532,14 +532,14 @@ pub type CopyableVal = Spanned<CopyableVal_>;
 pub type ExpFields = Fields<Exp>;
 
 /// Enum for unary operators
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UnaryOp {
     /// Boolean negation
     Not,
 }
 
 /// Enum for binary operators
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum BinOp {
     // u64 ops
     /// `+`
@@ -741,7 +741,7 @@ impl Script {
     /// Accessor for the body of the 'main' procedure
     pub fn body(&self) -> &Block_ {
         match self.main.value.body {
-            FunctionBody::Move { ref code, .. } => &code,
+            FunctionBody::Move { ref code, .. } => code,
             FunctionBody::Bytecode { .. } => panic!("Invalid body access on bytecode main()"),
             FunctionBody::Native => panic!("main() cannot be native"),
         }
@@ -804,7 +804,7 @@ impl QualifiedModuleIdent {
 impl ModuleIdent {
     pub fn name(&self) -> &ModuleName {
         match self {
-            ModuleIdent::Transaction(name) => &name,
+            ModuleIdent::Transaction(name) => name,
             ModuleIdent::Qualified(id) => &id.name,
         }
     }

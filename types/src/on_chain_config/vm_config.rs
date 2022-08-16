@@ -7,7 +7,7 @@ use move_core_types::gas_schedule::{CostTable, GasConstants};
 use serde::{Deserialize, Serialize};
 
 /// Defines all the on chain configuration data needed by VM.
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 pub struct VMConfig {
     pub gas_schedule: CostTable,
 }
@@ -40,7 +40,7 @@ impl OnChainConfig for VMConfig {
     const IDENTIFIER: &'static str = "DiemVMConfig";
 
     fn deserialize_into_config(bytes: &[u8]) -> Result<Self> {
-        let raw_vm_config = bcs::from_bytes::<VMConfigInner>(&bytes).map_err(|e| {
+        let raw_vm_config = bcs::from_bytes::<VMConfigInner>(bytes).map_err(|e| {
             format_err!(
                 "Failed first round of deserialization for VMConfigInner: {}",
                 e

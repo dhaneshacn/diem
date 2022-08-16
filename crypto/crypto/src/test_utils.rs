@@ -139,7 +139,7 @@ impl ::core::clone::Clone for TestDiemCryptoHasher {
     fn clone(&self) -> TestDiemCryptoHasher {
         match *self {
             TestDiemCryptoHasher(ref __self_0_0) => {
-                TestDiemCryptoHasher(::core::clone::Clone::clone(&(*__self_0_0)))
+                TestDiemCryptoHasher(::core::clone::Clone::clone(__self_0_0))
             }
         }
     }
@@ -152,7 +152,7 @@ impl TestDiemCryptoHasher {
     fn new() -> Self {
         let name = crate::_serde_name::trace_name::<TestDiemCrypto>()
             .expect("The `CryptoHasher` macro only applies to structs and enums");
-        TestDiemCryptoHasher(crate::hash::DefaultHasher::new(&name.as_bytes()))
+        TestDiemCryptoHasher(crate::hash::DefaultHasher::new(name.as_bytes()))
     }
 }
 #[cfg(any(test, feature = "fuzzing"))]
@@ -171,7 +171,7 @@ impl crate::hash::CryptoHasher for TestDiemCryptoHasher {
             let name = crate::_serde_name::trace_name::<TestDiemCrypto>()
                 .expect("The `CryptoHasher` macro only applies to structs and enums.")
                 .as_bytes();
-            crate::hash::DefaultHasher::prefixed_hash(&name)
+            crate::hash::DefaultHasher::prefixed_hash(name)
         })
     }
     fn update(&mut self, bytes: &[u8]) {

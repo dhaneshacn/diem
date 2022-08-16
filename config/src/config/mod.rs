@@ -49,7 +49,7 @@ use diem_types::waypoint::Waypoint;
 pub use test_config::*;
 
 /// Represents a deprecated config that provides no field verification.
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Eq, Serialize)]
 pub struct DeprecatedConfig {}
 
 /// Config pulls in configuration information from the config file.
@@ -89,7 +89,7 @@ pub struct NodeConfig {
     pub failpoints: Option<HashMap<String, String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(default, deny_unknown_fields)]
 pub struct BaseConfig {
     data_dir: PathBuf,
@@ -107,7 +107,7 @@ impl Default for BaseConfig {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum WaypointConfig {
     FromConfig(Waypoint),
@@ -132,7 +132,7 @@ impl WaypointConfig {
                 let content = fs::read_to_string(path)
                     .unwrap_or_else(|_| panic!("Failed to read waypoint file {}", path.display()));
                 Some(
-                    Waypoint::from_str(&content.trim())
+                    Waypoint::from_str(content.trim())
                         .unwrap_or_else(|_| panic!("Failed to parse waypoint: {}", content.trim())),
                 )
             }
@@ -396,7 +396,7 @@ pub trait PersistableConfig: Serialize + DeserializeOwned {
     }
 
     fn parse(serialized: &str) -> Result<Self, Error> {
-        serde_yaml::from_str(&serialized).map_err(|e| Error::Yaml("config".to_string(), e))
+        serde_yaml::from_str(serialized).map_err(|e| Error::Yaml("config".to_string(), e))
     }
 }
 
@@ -471,7 +471,7 @@ mod test {
         NodeConfig::parse(docker_public_full_node).unwrap();
 
         let contents = std::include_str!("test_data/safety_rules.yaml");
-        SafetyRulesConfig::parse(&contents)
+        SafetyRulesConfig::parse(contents)
             .unwrap_or_else(|e| panic!("Error in safety_rules.yaml: {}", e));
     }
 }

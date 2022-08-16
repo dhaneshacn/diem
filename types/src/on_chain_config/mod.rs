@@ -72,7 +72,7 @@ pub const ON_CHAIN_CONFIG_REGISTRY: &[ConfigID] = &[
     RegisteredCurrencies::CONFIG_ID,
 ];
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct OnChainConfigPayload {
     epoch: u64,
     configs: Arc<HashMap<ConfigID, Vec<u8>>>,
@@ -135,7 +135,7 @@ pub trait OnChainConfig: Send + Sync + DeserializeOwned {
     // Note: we cannot directly call the default `deserialize_into_config` implementation
     // in its override - this will just refer to the override implementation itself
     fn deserialize_default_impl(bytes: &[u8]) -> Result<Self> {
-        bcs::from_bytes::<Self>(&bytes)
+        bcs::from_bytes::<Self>(bytes)
             .map_err(|e| format_err!("[on-chain config] Failed to deserialize into config: {}", e))
     }
 

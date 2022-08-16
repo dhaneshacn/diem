@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #![forbid(unsafe_code)]
+#![allow(dead_code)]
 
 pub mod abstract_state;
 pub mod borrow_graph;
@@ -180,7 +181,7 @@ fn seed(seed: Option<String>) -> [u8; 32] {
     array
 }
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Status {
     VerificationFailure,
     ExecutionFailure,

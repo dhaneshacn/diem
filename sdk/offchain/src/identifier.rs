@@ -1,7 +1,7 @@
 // Copyright (c) The Diem Core Contributors
 // SPDX-License-Identifier: Apache-2.0
 
-#![allow(clippy::clippy::upper_case_acronyms)]
+#![allow(clippy::upper_case_acronyms)]
 
 use crate::subaddress::{Subaddress, SubaddressParseError};
 use bech32::{self, u5, FromBase32, ToBase32};
@@ -232,7 +232,7 @@ fn encode_intent(
         return format!("diem://{}?{}", encoded_account_identifier, params.join("&"));
     }
 
-    return format!("diem://{}", encoded_account_identifier);
+    format!("diem://{}", encoded_account_identifier)
 }
 
 fn normalize_amount(input: Option<&String>) -> Result<Option<u64>, IntentIdentifierError> {

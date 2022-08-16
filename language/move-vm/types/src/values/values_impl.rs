@@ -618,7 +618,7 @@ impl IndexedRef {
     fn read_ref(self) -> PartialVMResult<Value> {
         use Container::*;
 
-        let res = match &*self.container_ref.container() {
+        let res = match self.container_ref.container() {
             Locals(r) | Vec(r) | Struct(r) => r.borrow()[self.idx].copy_value()?,
             VecU8(r) => ValueImpl::U8(r.borrow()[self.idx]),
             VecU64(r) => ValueImpl::U64(r.borrow()[self.idx]),
@@ -1635,7 +1635,7 @@ impl VectorRef {
 
         macro_rules! err_pop_empty_vec {
             () => {
-                return Ok(NativeResult::err(cost, POP_EMPTY_VEC));
+                return Ok(NativeResult::err(cost, POP_EMPTY_VEC))
             };
         }
 
@@ -2677,7 +2677,7 @@ pub mod prop {
             L::Struct(struct_layout) => struct_layout
                 .fields()
                 .iter()
-                .map(|layout| value_strategy_with_layout(layout))
+                .map(value_strategy_with_layout)
                 .collect::<Vec<_>>()
                 .prop_map(move |vals| Value::struct_(Struct::pack(vals)))
                 .boxed(),
