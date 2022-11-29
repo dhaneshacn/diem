@@ -19,7 +19,7 @@ serde_yaml = "0.8.17"
 structopt = "0.3.21"
 walkdir = "2.3.1"
 
-bcs = "0.1.2"
+bcs = { git = "https://github.com/diem/bcs", rev = "9f435a13d859ce333b8e9fc5cb2d95fac06cb26a" }
 bytecode-verifier = { path = "../../bytecode-verifier" }
 
 disassembler = { path = "../disassembler" }

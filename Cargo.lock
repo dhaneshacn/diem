@@ -17,7 +17,7 @@ name = "abigen"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "codespan-reporting",
  "datatest-stable",
@@ -290,7 +290,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "backup-service",
- "bcs",
+ "bcs 0.1.4",
  "byteorder",
  "bytes",
  "diem-config",
@@ -334,7 +334,7 @@ name = "backup-service"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytes",
  "diem-config",
  "diem-crypto",
@@ -377,6 +377,15 @@ name = "bcs"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a86ab68e515a8b195b2be6ff544a83b626eb3b15ea435be1fa6b9d4ccd1591ac"
+dependencies = [
+ "serde",
+ "thiserror",
+]
+
+[[package]]
+name = "bcs"
+version = "0.1.4"
+source = "git+https://github.com/diem/bcs?rev=9f435a13d859ce333b8e9fc5cb2d95fac06cb26a#9f435a13d859ce333b8e9fc5cb2d95fac06cb26a"
 dependencies = [
  "serde",
  "thiserror",
@@ -665,7 +674,7 @@ name = "bytecode-source-map"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "codespan-reporting",
  "diem-workspace-hack",
  "move-binary-format",
@@ -903,7 +912,7 @@ name = "cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "chrono",
  "compiler",
  "crash-handler",
@@ -943,7 +952,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "bcs",
+ "bcs 0.1.4",
  "chrono",
  "consensus-types",
  "debug-interface",
@@ -1049,7 +1058,7 @@ name = "compiler"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-source-map",
  "bytecode-verifier",
  "diem-workspace-hack",
@@ -1069,7 +1078,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "bcs",
+ "bcs 0.1.4",
  "byteorder",
  "bytes",
  "channel",
@@ -1121,7 +1130,7 @@ name = "consensus-types"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-crypto-derive",
  "diem-infallible",
@@ -1457,7 +1466,7 @@ name = "db-bootstrapper"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-config",
  "diem-crypto",
  "diem-temppath",
@@ -1512,7 +1521,7 @@ name = "df-cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "datatest-stable",
  "diem-framework-releases",
  "diem-vm",
@@ -1527,7 +1536,7 @@ name = "diem-assets-proof"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-crypto",
  "diem-types",
@@ -1542,7 +1551,7 @@ dependencies = [
 name = "diem-bitvec"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-proptest-helpers",
  "diem-workspace-hack",
  "proptest",
@@ -1556,7 +1565,7 @@ name = "diem-client"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-json-rpc-types",
  "diem-types",
@@ -1578,7 +1587,7 @@ dependencies = [
 name = "diem-config"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-crypto-derive",
  "diem-global-constants",
@@ -1604,7 +1613,7 @@ version = "0.0.2"
 dependencies = [
  "aes-gcm",
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bitvec",
  "byteorder",
  "bytes",
@@ -1668,7 +1677,7 @@ name = "diem-e2e-tests-replay"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-interpreter",
  "diem-framework",
  "diem-types",
@@ -1689,7 +1698,7 @@ name = "diem-events-fetcher"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-types",
  "diem-workspace-hack",
@@ -1705,7 +1714,7 @@ name = "diem-faucet"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-config",
  "diem-infallible",
  "diem-logger",
@@ -1729,7 +1738,7 @@ version = "0.1.0"
 dependencies = [
  "abigen",
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "clap",
  "datatest-stable",
@@ -1764,7 +1773,7 @@ name = "diem-framework-releases"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "diem-crypto",
  "diem-types",
@@ -1791,7 +1800,7 @@ version = "0.1.0"
 dependencies = [
  "accumulator",
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "byteorder",
  "consensus",
  "consensus-types",
@@ -1834,7 +1843,7 @@ name = "diem-genesis-tool"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "consensus-types",
  "diem-config",
  "diem-crypto",
@@ -1888,7 +1897,7 @@ name = "diem-jellyfish-merkle"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "byteorder",
  "diem-crypto",
  "diem-crypto-derive",
@@ -1913,7 +1922,7 @@ name = "diem-json-rpc"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -1978,7 +1987,7 @@ name = "diem-json-rpc-types"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-transaction-builder",
  "diem-types",
@@ -1997,7 +2006,7 @@ name = "diem-key-manager"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "crash-handler",
  "diem-client",
  "diem-config",
@@ -2061,7 +2070,7 @@ name = "diem-management"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-config",
  "diem-crypto",
  "diem-global-constants",
@@ -2085,7 +2094,7 @@ name = "diem-mempool"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bounded-executor",
  "channel",
  "diem-config",
@@ -2149,7 +2158,7 @@ name = "diem-network-address-encryption"
 version = "0.1.0"
 dependencies = [
  "base64",
- "bcs",
+ "bcs 0.1.4",
  "diem-global-constants",
  "diem-infallible",
  "diem-logger",
@@ -2208,7 +2217,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -2342,7 +2351,7 @@ dependencies = [
 name = "diem-sdk"
 version = "0.0.2"
 dependencies = [
- "bcs",
+ "bcs 0.1.2",
  "diem-client",
  "diem-crypto",
  "diem-transaction-builder",
@@ -2381,7 +2390,7 @@ name = "diem-secure-storage"
 version = "0.1.0"
 dependencies = [
  "base64",
- "bcs",
+ "bcs 0.1.4",
  "chrono",
  "diem-crypto",
  "diem-crypto-derive",
@@ -2494,7 +2503,7 @@ name = "diem-transaction-builder"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-types",
  "diem-workspace-hack",
  "move-core-types",
@@ -2509,7 +2518,7 @@ name = "diem-transaction-replay"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-framework",
  "diem-framework-releases",
  "diem-resource-viewer",
@@ -2538,7 +2547,7 @@ version = "0.0.2"
 dependencies = [
  "aes-gcm",
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytes",
  "chrono",
  "diem-crypto",
@@ -2565,7 +2574,7 @@ name = "diem-validator-interface"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-config",
  "diem-scratchpad",
@@ -2601,7 +2610,7 @@ name = "diem-vm"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-framework",
  "diem-framework-releases",
@@ -2714,7 +2723,7 @@ name = "diem-writeset-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "diem-crypto",
  "diem-crypto-derive",
@@ -2748,7 +2757,7 @@ dependencies = [
  "accumulator",
  "anyhow",
  "arc-swap",
- "bcs",
+ "bcs 0.1.4",
  "byteorder",
  "diem-config",
  "diem-crypto",
@@ -3059,7 +3068,7 @@ name = "errmapgen"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "codespan-reporting",
  "datatest-stable",
  "diem-workspace-hack",
@@ -3076,7 +3085,7 @@ name = "execution-correctness"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "consensus-types",
  "diem-config",
  "diem-crypto",
@@ -3105,7 +3114,7 @@ name = "executor"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "compiler",
  "consensus-types",
  "diem-config",
@@ -3192,7 +3201,7 @@ name = "executor-types"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-scratchpad",
  "diem-secure-net",
@@ -3495,7 +3504,7 @@ checksum = "8f5f3913fa0bfe7ee1fd8248b6b9f42a5af4b9d65ec2dd2c3c26132b950ecfc2"
 name = "generate-format"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "consensus",
  "consensus-types",
  "diem-config",
@@ -3516,7 +3525,7 @@ dependencies = [
 name = "generate-key"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-temppath",
  "diem-workspace-hack",
@@ -3546,7 +3555,7 @@ dependencies = [
 name = "genesis-viewer"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-framework-releases",
  "diem-resource-viewer",
  "diem-types",
@@ -4248,7 +4257,7 @@ name = "jsonrpc-integration-tests"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-json-rpc-types",
  "diem-sdk",
  "diem-workspace-hack",
@@ -4352,7 +4361,7 @@ name = "language-e2e-tests"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "compiler",
  "diem-config",
  "diem-crypto",
@@ -4383,7 +4392,7 @@ dependencies = [
 name = "language-e2e-testsuite"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "compiler",
  "diem-crypto",
@@ -4663,7 +4672,7 @@ name = "move-cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "datatest-stable",
  "diem-workspace-hack",
@@ -4703,7 +4712,7 @@ name = "move-core-types"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-workspace-hack",
  "hex",
  "mirai-annotations",
@@ -4723,7 +4732,7 @@ name = "move-coverage"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-source-map",
  "bytecode-verifier",
  "codespan",
@@ -4743,7 +4752,7 @@ dependencies = [
 name = "move-explain"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-workspace-hack",
  "move-command-line-common",
  "move-core-types",
@@ -4768,7 +4777,7 @@ name = "move-lang"
 version = "0.0.1"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "borrow-graph",
  "bytecode-source-map",
  "bytecode-verifier",
@@ -4863,7 +4872,7 @@ name = "move-oncall-trainer"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "cli",
  "diem-client",
  "diem-config",
@@ -4887,7 +4896,7 @@ version = "0.1.0"
 dependencies = [
  "abigen",
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-source-map",
  "colored",
  "crev-recursive-digest",
@@ -5077,7 +5086,7 @@ dependencies = [
 name = "move-vm-types"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-workspace-hack",
  "mirai-annotations",
  "move-binary-format",
@@ -5160,7 +5169,7 @@ name = "network"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytes",
  "channel",
  "criterion",
@@ -5207,7 +5216,7 @@ dependencies = [
 name = "network-builder"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "channel",
  "diem-config",
  "diem-crypto",
@@ -5234,7 +5243,7 @@ name = "network-discovery"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "channel",
  "diem-config",
  "diem-crypto",
@@ -6450,7 +6459,7 @@ name = "resource-viewer"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-workspace-hack",
  "hex",
  "move-binary-format",
@@ -6738,7 +6747,7 @@ checksum = "ef703b7cb59335eae2eb93ceb664c0eb7ea6bf567079d843e09420219668e072"
 name = "safety-rules"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "consensus-types",
  "crash-handler",
  "criterion",
@@ -6826,7 +6835,7 @@ name = "sdk-compatibility"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-sdk",
  "diem-workspace-hack",
  "once_cell",
@@ -6861,7 +6870,7 @@ name = "seed-peer-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -6925,7 +6934,7 @@ version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b53e80288353f538b8a6aff447ce08fd59b81f3e56ca4c45326e6585155188ce"
 dependencies = [
- "bcs",
+ "bcs 0.1.2",
  "bincode",
  "heck",
  "include_dir",
@@ -7275,7 +7284,7 @@ dependencies = [
  "anyhow",
  "backup-cli",
  "base64",
- "bcs",
+ "bcs 0.1.4",
  "cli",
  "debug-interface",
  "diem-config",
@@ -7389,7 +7398,7 @@ dependencies = [
 name = "state-sync"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "bytes",
  "channel",
  "diem-config",
@@ -7497,7 +7506,7 @@ name = "storage-client"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-infallible",
  "diem-logger",
@@ -7513,7 +7522,7 @@ name = "storage-interface"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-scratchpad",
  "diem-secure-net",
@@ -7532,7 +7541,7 @@ name = "storage-service"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-config",
  "diem-crypto",
  "diem-logger",
@@ -7629,7 +7638,7 @@ checksum = "171758edb47aa306a78dfa4ab9aeb5167405bd4e3dc2b64e88f6a84bbe98bd63"
 name = "swiss-knife"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4",
  "diem-crypto",
  "diem-transaction-builder",
  "diem-types",
@@ -8218,7 +8227,7 @@ name = "transaction-builder-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "diem-types",
  "diem-workspace-hack",
  "heck",
@@ -8548,7 +8557,7 @@ name = "vm-genesis"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4",
  "bytecode-verifier",
  "diem-config",
  "diem-crypto",
