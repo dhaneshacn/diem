@@ -743,7 +743,7 @@ impl<'env> SpecTranslator<'env> {
             Operation::ContainsVec => {
                 self.translate_primitive_inst_call(node_id, "$ContainsVec", args)
             }
-            Operation::RangeVec => self.translate_primitive_call("$RangeVec", args),
+            Operation::RangeVec => self.translate_primitive_inst_call(node_id, "$RangeVec", args),
             Operation::InRangeVec => self.translate_primitive_call("InRangeVec", args),
             Operation::InRangeRange => self.translate_primitive_call("$InRange", args),
             Operation::MaxU8 => emit!(self.writer, "$MAX_U8"),
@@ -968,7 +968,15 @@ impl<'env> SpecTranslator<'env> {
         let memory = &self.get_memory_inst_from_node(node_id);
         let resource_name = boogie_modifies_memory_name(self.env, memory);
         emit!(self.writer, "{}[", resource_name);
+
+        let is_signer = self.env.get_node_type(args[0].node_id()).is_signer();
+        if is_signer {
+            emit!(self.writer, "$1_Signer_spec_address_of(");
+        }
         self.translate_exp(&args[0]);
+        if is_signer {
+            emit!(self.writer, ")");
+        }
         emit!(self.writer, "]");
     }
 
@@ -1212,23 +1220,43 @@ impl<'env> SpecTranslator<'env> {
         range: &(LocalVarDecl, Exp),
         body: &Exp,
     ) {
+        // Reconstruct the choice so we can easily determine used locals and temps.
+        let range_and_body = ExpData::Quant(
+            node_id,
+            kind,
+            vec![range.clone()],
+            vec![],
+            None,
+            body.clone(),
+        );
+        let some_var = range.0.name;
+        let free_vars = range_and_body
+            .free_vars(self.env)
+            .into_iter()
+            .filter(|(s, _)| *s != some_var)
+            .collect_vec();
+        let used_temps = range_and_body
+            .temporaries(self.env)
+            .into_iter()
+            .collect_vec();
+
+        // Create a new uninterpreted function and choice info only if it does not
+        // stem from the same original source than an existing one. This needs to be done to
+        // avoid non-determinism in reasoning with choices resulting from duplication
+        // of the same expressions. Consider a user has written `ensures choose i: ..`.
+        // This expression might be duplicated many times e.g. via opaque function caller
+        // sites. We want that the choice consistently returns the same value in each case;
+        // we can only guarantee this if we use the same uninterpreted function for each instance.
         let mut choice_infos = self.lifted_choice_infos.borrow_mut();
         let choice_count = choice_infos.len();
         let info = choice_infos.entry(node_id).or_insert_with(|| {
-            let some_var = range.0.name;
-            let free_vars = body
-                .free_vars(self.env)
-                .into_iter()
-                .filter(|(s, _)| *s != some_var)
-                .collect_vec();
-            let used_temps = body.temporaries(self.env).into_iter().collect_vec();
             let used_memory = body.used_memory(self.env).into_iter().collect_vec();
             LiftedChoiceInfo {
                 id: choice_count,
                 node_id,
                 kind,
-                free_vars,
-                used_temps,
+                free_vars: free_vars.clone(),
+                used_temps: used_temps.clone(),
                 used_memory,
                 var: some_var,
                 range: range.1.clone(),
@@ -1236,11 +1264,14 @@ impl<'env> SpecTranslator<'env> {
             }
         });
         let fun_name = boogie_choice_fun_name(info.id);
-        let args = info
-            .free_vars
+
+        // Construct the arguments. Notice that those might be different for each call of
+        // the choice function, resulting from the choice being injected into multiple contexts
+        // with different substitutions.
+        let args = free_vars
             .iter()
             .map(|(s, _)| s.display(self.env.symbol_pool()).to_string())
-            .chain(info.used_temps.iter().map(|(t, _)| format!("$t{}", t)))
+            .chain(used_temps.iter().map(|(t, _)| format!("$t{}", t)))
             .chain(
                 info.used_memory
                     .iter()

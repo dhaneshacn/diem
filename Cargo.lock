@@ -614,6 +614,7 @@ dependencies = [
  "move-core-types",
  "move-model",
  "move-prover-test-utils",
+ "move-stdlib",
  "num 0.4.0",
  "once_cell",
  "petgraph",
@@ -1051,6 +1052,19 @@ dependencies = [
  "ansi_term 0.11.0",
  "difference",
  "itertools 0.7.11",
+]
+
+[[package]]
+name = "compatibility-test"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "diem-logger",
+ "diem-sdk",
+ "diem-workspace-hack",
+ "forge",
+ "rand 0.8.3",
+ "tokio",
 ]
 
 [[package]]
@@ -1574,13 +1588,16 @@ dependencies = [
  "hex",
  "ipnet",
  "move-core-types",
+ "proptest",
  "reqwest",
  "serde",
  "serde_json",
+ "tempfile",
  "tokio",
  "tokio-tungstenite 0.14.0",
  "tracing",
  "ureq",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -3310,6 +3327,7 @@ dependencies = [
  "rand 0.8.3",
  "rand_core 0.6.2",
  "rayon",
+ "regex",
  "reqwest",
  "serde",
  "serde_json",
@@ -4133,6 +4151,7 @@ dependencies = [
  "ir-to-bytecode-syntax",
  "log",
  "move-binary-format",
+ "move-command-line-common",
  "move-core-types",
  "move-ir-types",
  "move-symbol-pool",
@@ -4694,6 +4713,7 @@ dependencies = [
  "serde",
  "serde_yaml",
  "structopt 0.3.21",
+ "tempfile",
  "walkdir",
 ]
 
@@ -4943,6 +4963,7 @@ dependencies = [
  "log",
  "move-binary-format",
  "move-command-line-common",
+ "move-core-types",
  "move-ir-types",
  "move-lang",
  "move-model",
@@ -4985,6 +5006,7 @@ dependencies = [
  "move-binary-format",
  "move-command-line-common",
  "move-core-types",
+ "move-lang",
  "move-prover",
  "move-unit-test",
  "move-vm-runtime",
@@ -5270,7 +5292,7 @@ dependencies = [
 [[package]]
 name = "nextest-runner"
 version = "0.1.0"
-source = "git+https://github.com/diem/diem-devtools?rev=1b61853016059b2dca577cefafff2825b49494a0#1b61853016059b2dca577cefafff2825b49494a0"
+source = "git+https://github.com/diem/diem-devtools?rev=1bdcf1b214119a6377fc0a8c3cf2de2ea5d8b27b#1bdcf1b214119a6377fc0a8c3cf2de2ea5d8b27b"
 dependencies = [
  "aho-corasick",
  "anyhow",
@@ -6088,6 +6110,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "prover-mutation"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "bytecode",
+ "chrono",
+ "clap",
+ "codespan",
+ "codespan-reporting",
+ "datatest-stable",
+ "diem-workspace-hack",
+ "hex",
+ "itertools 0.10.0",
+ "log",
+ "move-model",
+ "move-prover",
+ "move-prover-test-utils",
+ "num 0.4.0",
+ "plotters",
+ "serde",
+ "serde_json",
+ "simplelog",
+ "z3tracer",
+]
+
+[[package]]
 name = "proxy"
 version = "0.1.0"
 dependencies = [
@@ -6119,7 +6167,7 @@ checksum = "3ac73b1112776fc109b2e61909bc46c7e1bf0d7f690ffb1676553acce16d5cda"
 [[package]]
 name = "quick-junit"
 version = "0.1.0"
-source = "git+https://github.com/diem/diem-devtools?rev=1b61853016059b2dca577cefafff2825b49494a0#1b61853016059b2dca577cefafff2825b49494a0"
+source = "git+https://github.com/diem/diem-devtools?rev=1bdcf1b214119a6377fc0a8c3cf2de2ea5d8b27b#1bdcf1b214119a6377fc0a8c3cf2de2ea5d8b27b"
 dependencies = [
  "chrono",
  "indexmap",

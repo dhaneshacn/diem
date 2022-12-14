@@ -68,7 +68,6 @@ pub enum ConditionKind {
     LetPre(Symbol),
     Assert,
     Assume,
-    Axiom,
     Decreases,
     AbortsIf,
     AbortsWith,
@@ -77,8 +76,13 @@ pub enum ConditionKind {
     Emits,
     Ensures,
     Requires,
-    Invariant,
-    InvariantUpdate,
+    StructInvariant,
+    FunctionInvariant,
+    LoopInvariant,
+    GlobalInvariant(Vec<Type>),
+    GlobalInvariantUpdate(Vec<Type>),
+    SchemaInvariant(Vec<Type>),
+    Axiom(Vec<Type>),
 }
 
 impl ConditionKind {
@@ -87,7 +91,13 @@ impl ConditionKind {
         use ConditionKind::*;
         matches!(
             self,
-            Assert | Assume | Emits | Ensures | InvariantUpdate | LetPost(..)
+            LetPost(..)
+                | Assert
+                | Assume
+                | Emits
+                | Ensures
+                | LoopInvariant
+                | GlobalInvariantUpdate(..)
         )
     }
 
@@ -102,8 +112,8 @@ impl ConditionKind {
                 | SucceedsIf
                 | Emits
                 | Ensures
-                | Invariant
                 | Modifies
+                | FunctionInvariant
                 | LetPost(..)
                 | LetPre(..)
         )
@@ -112,31 +122,50 @@ impl ConditionKind {
     /// Returns true if this condition is allowed in a function body.
     pub fn allowed_on_fun_impl(&self) -> bool {
         use ConditionKind::*;
-        matches!(self, Assert | Assume | Decreases | LetPost(..) | LetPre(..))
+        matches!(
+            self,
+            Assert | Assume | Decreases | LoopInvariant | LetPost(..) | LetPre(..)
+        )
     }
 
     /// Returns true if this condition is allowed on a struct.
     pub fn allowed_on_struct(&self) -> bool {
         use ConditionKind::*;
-        matches!(self, Invariant)
+        matches!(self, StructInvariant)
     }
 
     /// Returns true if this condition is allowed on a module.
     pub fn allowed_on_module(&self) -> bool {
         use ConditionKind::*;
-        matches!(self, Invariant | InvariantUpdate | Axiom)
+        matches!(
+            self,
+            GlobalInvariant(..) | GlobalInvariantUpdate(..) | Axiom(..)
+        )
     }
 }
 
 impl std::fmt::Display for ConditionKind {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        fn display_ty_locals(f: &mut Formatter<'_>, ty_locals: &[Type]) -> std::fmt::Result {
+            if !ty_locals.is_empty() {
+                write!(f, "<")?;
+                for (i, ty) in ty_locals.iter().enumerate() {
+                    if i != 0 {
+                        write!(f, ", ")?;
+                    }
+                    write!(f, "{:?}", ty)?;
+                }
+                write!(f, ">")?;
+            }
+            Ok(())
+        }
+
         use ConditionKind::*;
         match self {
             LetPost(sym) => write!(f, "let({:?})", sym),
             LetPre(sym) => write!(f, "let old({:?})", sym),
             Assert => write!(f, "assert"),
             Assume => write!(f, "assume"),
-            Axiom => write!(f, "axiom"),
             Decreases => write!(f, "decreases"),
             AbortsIf => write!(f, "aborts_if"),
             AbortsWith => write!(f, "aborts_with"),
@@ -145,8 +174,24 @@ impl std::fmt::Display for ConditionKind {
             Emits => write!(f, "emits"),
             Ensures => write!(f, "ensures"),
             Requires => write!(f, "requires"),
-            Invariant => write!(f, "invariant"),
-            InvariantUpdate => write!(f, "invariant update"),
+            StructInvariant | FunctionInvariant | LoopInvariant => write!(f, "invariant"),
+            GlobalInvariant(ty_locals) => {
+                write!(f, "invariant")?;
+                display_ty_locals(f, ty_locals)
+            }
+            GlobalInvariantUpdate(ty_locals) => {
+                write!(f, "invariant")?;
+                display_ty_locals(f, ty_locals)?;
+                write!(f, " update")
+            }
+            SchemaInvariant(ty_locals) => {
+                write!(f, "invariant")?;
+                display_ty_locals(f, ty_locals)
+            }
+            Axiom(ty_locals) => {
+                write!(f, "axiom")?;
+                display_ty_locals(f, ty_locals)
+            }
         }
     }
 }
@@ -235,6 +280,10 @@ impl Spec {
 
     pub fn filter_kind(&self, kind: ConditionKind) -> impl Iterator<Item = &Condition> {
         self.filter(move |c| c.kind == kind)
+    }
+
+    pub fn filter_kind_axiom(&self) -> impl Iterator<Item = &Condition> {
+        self.filter(move |c| matches!(c.kind, ConditionKind::Axiom(..)))
     }
 
     pub fn any<P>(&self, pred: P) -> bool
@@ -438,8 +487,9 @@ impl ExpData {
     }
 
     /// Returns the free local variables, inclusive their types, used in this expression.
-    pub fn free_vars(&self, env: &GlobalEnv) -> BTreeMap<Symbol, Type> {
-        let mut vars = BTreeMap::new();
+    /// Result is ordered by occurrence.
+    pub fn free_vars(&self, env: &GlobalEnv) -> Vec<(Symbol, Type)> {
+        let mut vars = vec![];
         let mut shadowed = vec![]; // Should be multiset but don't have this
         let mut visitor = |up: bool, e: &ExpData| {
             use ExpData::*;
@@ -461,8 +511,8 @@ impl ExpData {
                     }
                 }
                 if let LocalVar(id, sym) = e {
-                    if !shadowed.contains(sym) {
-                        vars.insert(*sym, env.get_node_type(*id));
+                    if !shadowed.contains(sym) && !vars.iter().any(|(s, _)| s == sym) {
+                        vars.push((*sym, env.get_node_type(*id)));
                     }
                 }
             }
@@ -504,12 +554,14 @@ impl ExpData {
         result
     }
 
-    /// Returns the temporaries used in this expression.
-    pub fn temporaries(&self, env: &GlobalEnv) -> BTreeMap<TempIndex, Type> {
-        let mut temps = BTreeMap::new();
+    /// Returns the temporaries used in this expression. Result is ordered by occurrence.
+    pub fn temporaries(&self, env: &GlobalEnv) -> Vec<(TempIndex, Type)> {
+        let mut temps = vec![];
         let mut visitor = |e: &ExpData| {
             if let ExpData::Temporary(id, idx) = e {
-                temps.insert(*idx, env.get_node_type(*id));
+                if !temps.iter().any(|(i, _)| i == idx) {
+                    temps.push((*idx, env.get_node_type(*id)));
+                }
             }
         };
         self.visit(&mut visitor);
@@ -567,7 +619,10 @@ impl ExpData {
             }
             Lambda(_, _, body) => body.visit_pre_post(visitor),
             Quant(_, _, ranges, triggers, condition, body) => {
-                for (_, range) in ranges {
+                for (decl, range) in ranges {
+                    if let Some(binding) = &decl.binding {
+                        binding.visit_pre_post(visitor);
+                    }
                     range.visit_pre_post(visitor);
                 }
                 for trigger in triggers {
