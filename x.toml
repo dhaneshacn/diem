@@ -222,6 +222,7 @@ members = [
     "invalid-mutations",
     "ir-testsuite",
     "jsonrpc-integration-tests",
+    "testnet-regression-tests",
     "jsonrpc-types-proto",
     "language-benchmarks",
     "language-e2e-tests",

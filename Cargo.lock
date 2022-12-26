@@ -17,7 +17,7 @@ name = "abigen"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "codespan-reporting",
  "datatest-stable",
@@ -165,9 +165,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.40"
+version = "1.0.68"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28b2cd92db5cbd74e8e5028f7e27dd7aa3090e89e4f2a197cc7c8dfb69c7063b"
+checksum = "2cb2f989d18dd141ab8ae82f64d1a8cdd37e0840f73a406896cf5e99502fab61"
 dependencies = [
  "backtrace",
 ]
@@ -203,6 +203,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23b62fc65de8e4e7f52534fb52b0f3ed04746ae267519eef2a83941e8085068b"
 
 [[package]]
+name = "assert-json-diff"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47e4f2b81832e72834d7518d8487a0396a28cc408186a2e8854c0f98011faf12"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "assert_approx_eq"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -224,9 +234,9 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a3548b8efc9f8e8a5a0a2808c5bd8451a9031b9e5b879a79590304ae928b0a70"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -235,9 +245,9 @@ version = "0.1.48"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "36ea56748e10732c49404c153638a15ec3d6211ec5ff35d9bb20e13b93576adf"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -290,7 +300,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "backup-service",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "byteorder",
  "bytes",
  "diem-config",
@@ -334,7 +344,7 @@ name = "backup-service"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytes",
  "diem-config",
  "diem-crypto",
@@ -375,6 +385,16 @@ checksum = "7b8a45dc8036c7e52889226a96edacd45831c0dbdb8b803a58b8e0e12613b1a6"
 [[package]]
 name = "bcs"
 version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8b06b4c1f053002b70e7084ac944c77d58d5d92b2110dbc5e852735e00ad3ccc"
+dependencies = [
+ "serde",
+ "thiserror",
+]
+
+[[package]]
+name = "bcs"
+version = "0.1.4"
 source = "git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6"
 dependencies = [
  "serde",
@@ -408,7 +428,7 @@ dependencies = [
  "lazy_static",
  "lazycell",
  "peeking_take_while",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "regex",
  "rustc-hash",
@@ -665,7 +685,7 @@ name = "bytecode-source-map"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "codespan-reporting",
  "diem-workspace-hack",
  "move-binary-format",
@@ -912,7 +932,7 @@ name = "cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "chrono",
  "compiler",
  "crash-handler",
@@ -952,7 +972,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "chrono",
  "consensus-types",
  "debug-interface",
@@ -1058,7 +1078,7 @@ name = "compiler"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-source-map",
  "bytecode-verifier",
  "diem-workspace-hack",
@@ -1078,7 +1098,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "byteorder",
  "bytes",
  "channel",
@@ -1130,7 +1150,7 @@ name = "consensus-types"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-crypto-derive",
  "diem-infallible",
@@ -1466,7 +1486,7 @@ name = "db-bootstrapper"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-config",
  "diem-crypto",
  "diem-temppath",
@@ -1521,7 +1541,7 @@ name = "df-cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "datatest-stable",
  "diem-framework-releases",
  "diem-vm",
@@ -1536,7 +1556,7 @@ name = "diem-assets-proof"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-crypto",
  "diem-types",
@@ -1551,7 +1571,7 @@ dependencies = [
 name = "diem-bitvec"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-proptest-helpers",
  "diem-workspace-hack",
  "proptest",
@@ -1565,7 +1585,7 @@ name = "diem-client"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-json-rpc-types",
  "diem-types",
@@ -1590,7 +1610,7 @@ dependencies = [
 name = "diem-config"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-crypto-derive",
  "diem-global-constants",
@@ -1616,7 +1636,7 @@ version = "0.0.2"
 dependencies = [
  "aes-gcm",
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bitvec",
  "byteorder",
  "bytes",
@@ -1654,9 +1674,9 @@ version = "0.0.2"
 dependencies = [
  "anyhow",
  "diem-workspace-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -1680,7 +1700,7 @@ name = "diem-e2e-tests-replay"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-interpreter",
  "diem-framework",
  "diem-types",
@@ -1701,7 +1721,7 @@ name = "diem-events-fetcher"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-types",
  "diem-workspace-hack",
@@ -1717,7 +1737,7 @@ name = "diem-faucet"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-config",
  "diem-infallible",
  "diem-logger",
@@ -1741,7 +1761,7 @@ version = "0.1.0"
 dependencies = [
  "abigen",
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "clap",
  "datatest-stable",
@@ -1777,7 +1797,7 @@ name = "diem-framework-releases"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "diem-crypto",
  "diem-types",
@@ -1804,7 +1824,7 @@ version = "0.1.0"
 dependencies = [
  "accumulator",
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "byteorder",
  "consensus",
  "consensus-types",
@@ -1847,7 +1867,7 @@ name = "diem-genesis-tool"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "consensus-types",
  "diem-config",
  "diem-crypto",
@@ -1901,7 +1921,7 @@ name = "diem-jellyfish-merkle"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "byteorder",
  "diem-crypto",
  "diem-crypto-derive",
@@ -1926,7 +1946,7 @@ name = "diem-json-rpc"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -1992,7 +2012,7 @@ name = "diem-json-rpc-types"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-transaction-builder",
  "diem-types",
@@ -2011,7 +2031,7 @@ name = "diem-key-manager"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "crash-handler",
  "diem-client",
  "diem-config",
@@ -2058,9 +2078,9 @@ name = "diem-log-derive"
 version = "0.1.0"
 dependencies = [
  "diem-workspace-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -2087,7 +2107,7 @@ name = "diem-management"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-config",
  "diem-crypto",
  "diem-global-constants",
@@ -2111,7 +2131,7 @@ name = "diem-mempool"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bounded-executor",
  "channel",
  "diem-config",
@@ -2175,7 +2195,7 @@ name = "diem-network-address-encryption"
 version = "0.1.0"
 dependencies = [
  "base64",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-global-constants",
  "diem-infallible",
  "diem-logger",
@@ -2234,7 +2254,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "base64",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -2366,7 +2386,7 @@ dependencies = [
 name = "diem-sdk"
 version = "0.0.2"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-crypto",
  "diem-transaction-builder",
@@ -2405,7 +2425,7 @@ name = "diem-secure-storage"
 version = "0.1.0"
 dependencies = [
  "base64",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "chrono",
  "diem-crypto",
  "diem-crypto-derive",
@@ -2428,7 +2448,7 @@ name = "diem-smoke-test-attribute"
 version = "0.1.0"
 dependencies = [
  "diem-workspace-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
 ]
 
@@ -2518,7 +2538,7 @@ name = "diem-transaction-builder"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-types",
  "diem-workspace-hack",
  "move-core-types",
@@ -2533,7 +2553,7 @@ name = "diem-transaction-replay"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-framework",
  "diem-framework-releases",
  "diem-resource-viewer",
@@ -2561,7 +2581,7 @@ name = "diem-transactional-test-harness"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "datatest-stable",
  "diem-crypto",
  "diem-framework",
@@ -2586,7 +2606,7 @@ version = "0.0.2"
 dependencies = [
  "aes-gcm",
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytes",
  "chrono",
  "diem-crypto",
@@ -2613,7 +2633,7 @@ name = "diem-validator-interface"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-config",
  "diem-scratchpad",
@@ -2649,7 +2669,7 @@ name = "diem-vm"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-framework",
  "diem-framework-releases",
@@ -2745,7 +2765,7 @@ dependencies = [
  "standback",
  "subtle",
  "syn 0.15.44",
- "syn 1.0.74",
+ "syn 1.0.107",
  "tiny-keccak",
  "tokio",
  "tokio-util 0.6.7",
@@ -2762,7 +2782,7 @@ name = "diem-writeset-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "diem-crypto",
  "diem-crypto-derive",
@@ -2796,7 +2816,7 @@ dependencies = [
  "accumulator",
  "anyhow",
  "arc-swap",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "byteorder",
  "diem-config",
  "diem-crypto",
@@ -3062,9 +3082,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8946e241a7774d5327d92749c50806f275f57d031d2229ecbfd65469a8ad338e"
 dependencies = [
  "once_cell",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -3107,7 +3127,7 @@ name = "errmapgen"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "codespan-reporting",
  "datatest-stable",
  "diem-workspace-hack",
@@ -3124,7 +3144,7 @@ name = "execution-correctness"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "consensus-types",
  "diem-config",
  "diem-crypto",
@@ -3153,7 +3173,7 @@ name = "executor"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "compiler",
  "consensus-types",
  "diem-config",
@@ -3240,7 +3260,7 @@ name = "executor-types"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-scratchpad",
  "diem-secure-net",
@@ -3509,9 +3529,9 @@ checksum = "c54913bae956fb8df7f4dc6fc90362aa72e69148e3f39041fbe8742d21e0ac57"
 dependencies = [
  "autocfg",
  "proc-macro-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -3567,7 +3587,7 @@ checksum = "8f5f3913fa0bfe7ee1fd8248b6b9f42a5af4b9d65ec2dd2c3c26132b950ecfc2"
 name = "generate-format"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "consensus",
  "consensus-types",
  "diem-config",
@@ -3588,7 +3608,7 @@ dependencies = [
 name = "generate-key"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-temppath",
  "diem-workspace-hack",
@@ -3618,7 +3638,7 @@ dependencies = [
 name = "genesis-viewer"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-framework-releases",
  "diem-resource-viewer",
  "diem-types",
@@ -4104,9 +4124,9 @@ checksum = "327869970574819d24d1dca25c891856144d29159ab797fa9dc725c5c3f57215"
 dependencies = [
  "anyhow",
  "proc-macro-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -4339,7 +4359,7 @@ name = "jsonrpc-integration-tests"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-json-rpc-types",
  "diem-sdk",
  "diem-workspace-hack",
@@ -4443,7 +4463,7 @@ name = "language-e2e-tests"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "compiler",
  "diem-config",
  "diem-crypto",
@@ -4475,7 +4495,7 @@ dependencies = [
 name = "language-e2e-testsuite"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "compiler",
  "diem-crypto",
@@ -4757,7 +4777,7 @@ name = "move-cli"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "datatest-stable",
  "diem-workspace-hack",
@@ -4799,7 +4819,7 @@ name = "move-core-types"
 version = "0.0.2"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-workspace-hack",
  "hex",
  "mirai-annotations",
@@ -4819,7 +4839,7 @@ name = "move-coverage"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-source-map",
  "bytecode-verifier",
  "codespan",
@@ -4839,7 +4859,7 @@ dependencies = [
 name = "move-explain"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-workspace-hack",
  "move-command-line-common",
  "move-core-types",
@@ -4864,7 +4884,7 @@ name = "move-lang"
 version = "0.0.1"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "borrow-graph",
  "bytecode-source-map",
  "bytecode-verifier",
@@ -4937,7 +4957,7 @@ name = "move-oncall-trainer"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "cli",
  "diem-client",
  "diem-config",
@@ -4961,7 +4981,7 @@ version = "0.1.0"
 dependencies = [
  "abigen",
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-source-map",
  "colored",
  "crev-recursive-digest",
@@ -5191,7 +5211,7 @@ dependencies = [
 name = "move-vm-types"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-workspace-hack",
  "mirai-annotations",
  "move-binary-format",
@@ -5286,7 +5306,7 @@ name = "network"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytes",
  "channel",
  "criterion",
@@ -5333,7 +5353,7 @@ dependencies = [
 name = "network-builder"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "channel",
  "diem-config",
  "diem-crypto",
@@ -5360,7 +5380,7 @@ name = "network-discovery"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "channel",
  "diem-config",
  "diem-crypto",
@@ -5513,9 +5533,9 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "876a53fff98e03a936a674b29568b0e605f06b29372c2489ff4de23f1949743d"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -5577,9 +5597,9 @@ name = "num-variants"
 version = "0.1.0"
 dependencies = [
  "diem-workspace-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -5724,9 +5744,9 @@ checksum = "41db02c8f8731cdd7a72b433c7900cce4bf245465b452c364bfd21f4566ab055"
 dependencies = [
  "Inflector",
  "proc-macro-error",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -5865,9 +5885,9 @@ checksum = "99b8db626e31e5b81787b9783425769681b347011cc59471e33ea46d2ea0cf55"
 dependencies = [
  "pest",
  "pest_meta",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -5906,9 +5926,9 @@ version = "1.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e8fe8163d14ce7f0cdac2e040116f22eac817edabff0be91e8aff7e9accf389"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -5983,9 +6003,9 @@ version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "597c3287a549da151aca6ada2795ecde089c7527bd5093114e8e0e1c3f0e52b1"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -6036,9 +6056,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da25490ff9892aab3fcf7c36f08cfb902dd3e71ca0f9f9517bea02a73a5ce38c"
 dependencies = [
  "proc-macro-error-attr",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
  "version_check",
 ]
 
@@ -6048,7 +6068,7 @@ version = "1.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a1be40180e52ecc98ad80b184934baf3d0d29f979574e439af5a55274b35f869"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "version_check",
 ]
@@ -6076,11 +6096,11 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.28"
+version = "1.0.49"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c7ed8b8c7b886ea3ed7dde405212185f423ab44682667c8c6dd14aa1d9f6612"
+checksum = "57a8eca9f9c4ffde41714334dee777596264c7825420f521abc92b5b5deb63a5"
 dependencies = [
- "unicode-xid 0.2.2",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -6164,9 +6184,9 @@ checksum = "600d2f334aa05acb02a755e217ef1ab6dea4d51b58b7846588b747edec04efba"
 dependencies = [
  "anyhow",
  "itertools 0.10.0",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -6293,7 +6313,7 @@ version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3d0b9745dc2debf507c8422de05d7226cc1f0644216dfdfead988f9b1ab32a7"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
 ]
 
 [[package]]
@@ -6521,9 +6541,9 @@ version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4c38e3aecd2b21cb3959637b883bb3714bc7e43f0268b9a29d3743ee3e55cdd2"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -6601,7 +6621,7 @@ name = "resource-viewer"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-workspace-hack",
  "hex",
  "move-binary-format",
@@ -6654,10 +6674,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "041bb0202c14f6a158bbbf086afb03d0c6e975c2dec7d4912f8061ed44f290af"
 dependencies = [
  "cfg-if 1.0.0",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "rustc_version 0.3.3",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -6902,7 +6922,7 @@ checksum = "ef703b7cb59335eae2eb93ceb664c0eb7ea6bf567079d843e09420219668e072"
 name = "safety-rules"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "consensus-types",
  "crash-handler",
  "criterion",
@@ -6990,7 +7010,7 @@ name = "sdk-compatibility"
 version = "0.0.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-sdk",
  "diem-workspace-hack",
  "once_cell",
@@ -7025,7 +7045,7 @@ name = "seed-peer-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-client",
  "diem-config",
  "diem-crypto",
@@ -7076,9 +7096,9 @@ dependencies = [
 
 [[package]]
 name = "serde"
-version = "1.0.127"
+version = "1.0.151"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f03b9878abf6d14e6779d3f24f07b2cfa90352cfec4acc5aab8f1ac7f146fae8"
+checksum = "97fed41fc1a24994d044e6db6935e69511a1153b52c15eb42493b26fa87feba0"
 dependencies = [
  "serde_derive",
 ]
@@ -7088,7 +7108,7 @@ name = "serde-generate"
 version = "0.20.6"
 source = "git+https://github.com/diem/serde-reflection-diem.git?rev=bb38a0fdb7b9c219cbbb646097e847587d059086"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bincode",
  "heck",
  "include_dir",
@@ -7152,13 +7172,13 @@ dependencies = [
 
 [[package]]
 name = "serde_derive"
-version = "1.0.127"
+version = "1.0.151"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a024926d3432516606328597e0f224a51355a493b49fdd67e9209187cbe55ecc"
+checksum = "255abe9a125a985c05190d687b320c12f9b1f0b99445e608c21ba0782c719ad8"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7179,9 +7199,9 @@ version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2dc6b7951b17b051f3210b063f12cc17320e2fe30ae05b0fe2a3abb068551c76"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7237,9 +7257,9 @@ version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b2acd6defeddb41eb60bb468f8825d0cfd0c2a76bc03bfd235b6a1dc4f6a1ad5"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7438,7 +7458,7 @@ dependencies = [
  "anyhow",
  "backup-cli",
  "base64",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "cli",
  "compiler",
  "debug-interface",
@@ -7554,7 +7574,7 @@ dependencies = [
 name = "state-sync"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytes",
  "channel",
  "diem-config",
@@ -7628,11 +7648,11 @@ version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c87a60a40fccc84bef0652345bbbbbe20a605bf5d0ce81719fc476f5c03b50ef"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "serde",
  "serde_derive",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7642,13 +7662,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "58fa5ff6ad0d98d1ffa8cb115892b6e69d67799f6763e162a1c9db421dc22e11"
 dependencies = [
  "base-x",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "serde",
  "serde_derive",
  "serde_json",
  "sha1",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7662,7 +7682,7 @@ name = "storage-client"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-infallible",
  "diem-logger",
@@ -7678,7 +7698,7 @@ name = "storage-interface"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-scratchpad",
  "diem-secure-net",
@@ -7697,7 +7717,7 @@ name = "storage-service"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-config",
  "diem-crypto",
  "diem-logger",
@@ -7763,9 +7783,9 @@ checksum = "5ba9cdfda491b814720b6b06e0cac513d922fc407582032e8706e9f137976f90"
 dependencies = [
  "heck",
  "proc-macro-error",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -7794,7 +7814,7 @@ checksum = "171758edb47aa306a78dfa4ab9aeb5167405bd4e3dc2b64e88f6a84bbe98bd63"
 name = "swiss-knife"
 version = "0.1.0"
 dependencies = [
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-crypto",
  "diem-transaction-builder",
  "diem-types",
@@ -7820,13 +7840,13 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "1.0.74"
+version = "1.0.107"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1873d832550d4588c3dbc20f01361ab00bfe741048f71e3fecf145a7cc18b29c"
+checksum = "1f4064b5b16e03ae50984a5a8ed5d4f8803e6bc1fd170a3cda91a1be4b18e3f5"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "unicode-xid 0.2.2",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -7835,9 +7855,9 @@ version = "0.12.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b834f2d66f734cb897113e34aaff2f1ab4719ca946f9a7358dba8f8064148701"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
  "unicode-xid 0.2.2",
 ]
 
@@ -7986,6 +8006,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "testnet-regression-tests"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "assert-json-diff",
+ "base64",
+ "bcs 0.1.4 (registry+https://github.com/rust-lang/crates.io-index)",
+ "diem-json-rpc-types",
+ "diem-sdk",
+ "diem-transaction-builder",
+ "forge",
+ "hex",
+ "rand_core 0.6.2",
+ "reqwest",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
 name = "textwrap"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8019,9 +8058,9 @@ version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "982d17546b47146b28f7c22e3d08465f6b8903d0ea13c1660d9d84a6e7adcdbb"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -8076,10 +8115,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e5c3be1edfad6027c69f5491cf4cb310d1a71ecd6af742788c6ff8bced86b8fa"
 dependencies = [
  "proc-macro-hack",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
  "standback",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -8152,9 +8191,9 @@ version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9724f9a975fb987ef7a3cd9be0350edcbe130698af5b8f7a631e23d42d052484"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -8324,9 +8363,9 @@ version = "0.1.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c42e6fa53307c8a17e4ccd4dc81cf5ec38db9209f59b222210375b54ee40d1e2"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -8396,7 +8435,7 @@ name = "transaction-builder-generator"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "diem-types",
  "diem-workspace-hack",
  "heck",
@@ -8589,6 +8628,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "unicode-ident"
+version = "1.0.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "84a22b9f218b40614adcb3f4ff08b703773ad44fa9423e4e0d346d5db86e4ebc"
+
+[[package]]
 name = "unicode-normalization"
 version = "0.1.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8700,7 +8745,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aae2faf80ac463422992abf4de234731279c058aaf33171ca70277c98406b124"
 dependencies = [
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
 ]
 
 [[package]]
@@ -8726,7 +8771,7 @@ name = "vm-genesis"
 version = "0.1.0"
 dependencies = [
  "anyhow",
- "bcs",
+ "bcs 0.1.4 (git+https://github.com/diem/bcs?rev=30ce9f4ac51342d2fb4c04c4f5b40683d9652dc6)",
  "bytecode-verifier",
  "diem-config",
  "diem-crypto",
@@ -8873,9 +8918,9 @@ dependencies = [
  "bumpalo",
  "lazy_static",
  "log",
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
  "wasm-bindgen-shared",
 ]
 
@@ -8907,9 +8952,9 @@ version = "0.2.71"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cc053ec74d454df287b9374ee8abb36ffd5acb95ba87da3ba5b7d3fe20eb401e"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
  "wasm-bindgen-backend",
  "wasm-bindgen-shared",
 ]
@@ -9155,8 +9200,8 @@ version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4eb56561c1f8f5441784ea91f52ae8b44268d920f2a59121968fec9297fa7157"
 dependencies = [
- "proc-macro2 1.0.28",
+ "proc-macro2 1.0.49",
  "quote 1.0.9",
- "syn 1.0.74",
+ "syn 1.0.107",
  "synstructure",
 ]
