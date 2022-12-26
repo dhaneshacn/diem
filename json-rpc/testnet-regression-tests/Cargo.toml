@@ -19,7 +19,6 @@ diem-json-rpc-types = { path = "../types" }
 diem-sdk = { path = "../../sdk" }
 forge = { path = "../../testsuite/forge" }
 diem-transaction-builder = { path = "../../sdk/transaction-builder" }
-
 base64="*"
 rand_core="0.6.2"
 assert-json-diff = "2.0.2"
